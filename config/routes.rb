@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'users/sessions' }
   get 'home/index'
   get 'home/show'
 
   root to: "home#index"
+
+  # 2FA機能
+  get 'two_factor_authentication/show', to: 'two_factor_authentication#show', as: :two_factor_authentication_show
+  post 'two_factor_authentication/update', to: 'two_factor_authentication#update', as: :two_factor_authentication_update
   
   ## 開発環境用letter_opener
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
