@@ -20,6 +20,16 @@ Devise.setup do |config|
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
 
+  config.max_login_attempts = 3  # Maximum second factor attempts count.
+  config.allowed_otp_drift_seconds = 30  # Allowed TOTP time drift between client and server.
+  config.otp_length = 6  # TOTP code length
+  config.direct_otp_valid_for = 5.minutes  # Time before direct OTP becomes invalid
+  config.direct_otp_length = 6  # Direct OTP code length
+  config.remember_otp_session_for_seconds = 30.days  # Time before browser has to perform 2fA again. Default is 0.
+  config.otp_secret_encryption_key = 'fbc512318120d748355fd872363a3155cf9e97936e5614053479c2b3965e3ebb8501496b33a5d3b97b4fa8f65f7b122efb07795dd64ec45351b1395545e706d5'
+  config.second_factor_resource_id = 'id' # Field or method name used to set value for 2fA remember cookie
+  config.delete_cookie_on_logout = false # Delete cookie when user signs out, to force 2fA again on login
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
