@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_one_time_password
+  has_one_time_password after_column_name: :last_otp_at
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
