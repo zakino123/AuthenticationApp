@@ -1,11 +1,13 @@
 class TwoFactorAuthenticationController < ApplicationController
   def show
-    @user = User.find(cookies[:two_factor_user_id])
+    user_id = current_user.id
+    sign_out current_user
+    @user = User.find(user_id)
   end
 
   def update
     permit_parameters = params.permit(:user_id, :otp).to_h
-    user = User.find(cookies[:two_factor_user_id])
+    user = User.find(permit_parameters[:user_id])
 
     # OTPが正しければユーザーをサインイン、正しくなければ認証画面にリダイレクト
     if user.authenticate_otp(permit_parameters[:otp], drift: 60)

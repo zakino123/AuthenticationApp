@@ -7,12 +7,6 @@ class Users::SessionsController < Devise::SessionsController
     super do |resource|
       # ログインに成功したら、ワンタイムパスワードを生成して、保存する
       if resource.persisted?
-        cookies[:two_factor_user_id] = {
-          value: resource.id,
-          expires: 3.minutes.from_now
-        }
-        sign_out resource
-
         # ログイン成功後にワンタイムパスワード画面にメールを送信
         otp = resource.otp_code
         UserMailer.otp_email(resource, otp).deliver_now
