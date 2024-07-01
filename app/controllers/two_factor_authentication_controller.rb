@@ -1,8 +1,5 @@
 class TwoFactorAuthenticationController < ApplicationController
   def show
-    user_id = current_user.id
-    sign_out current_user
-    @user = User.find(user_id)
   end
 
   def update
