@@ -1,0 +1,11 @@
+<h2>二要素認証</h2>
+<%= form_with url: two_factor_authentication_update_path, method: :post do %>
+  <div class="field">
+    <input type="hidden" name="user_id" value="<%= flash[:user_id] %>" autocomplete="off">
+    <%= label_tag :otp, 'ワンタイムパスワード入力：' %>
+    <%= text_field_tag :otp %>
+  </div>
+  <div class="actions">
+    <%= submit_tag '送信' %>
+  </div>
+<% end %>
